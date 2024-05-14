@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+
+
+{% block head %} 
+<link rel="stylesheet" href="{{ url_for('static', filename='css/index.css')}}">
+{% endblock %}
+
+
+{% block body %} 
+<header id="hd">
+    <div class="navLogo">
+        <img src="../static/image/logo.png" alt="Summarize" class="nav_logo"/>  
+    </div>
+    <div class="hamburger">
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+    </div>
+    <nav class="nav-bar">
+        <ul>
+            <li><a class="active" id="home" href="/">Home</a></li>
+            <li><a class="inactive" id="text" href="text">Text</a></li>
+            <li><a class="inactive" id="video" href="video">Video</a></li>
+            <li><a class="inactive" id="audio" href="audio">Audio</a></li>
+        </ul>
+    </nav>
+    
+</header>
+
+<div class="welcome-page">
+    <div class="leftRight">
+        <div class="welcome-text">
+            <div class="title">
+                <div class="title-01">WELCOME TO SUMMARIZE</div>
+                <div class="title-02">The Online Web and</div>
+                <div class="title-02">Video Summarizer</div>
+               
+                <div class="options">
+                    <a href="text">TEXT</a>
+                    <a href="video">VIDEO</a>
+                    <a href="audio">AUDIO</a>
+                   
+                </div>
+            </div>
+        </div>
+        <div class="welcome-image">
+            <img src="../static/image/welcome-image.png" alt="welcome-image" class="icon"/>
+        </div>
+    </div>
+</div>
+
+<script>
+    hamburger = document.querySelector(".hamburger");
+    hamburger.onclick = function () {
+        navBar = document.querySelector(".nav-bar")
+        navBar.classList.toggle("active");
+    }
+
+    let hdr = document.getElementById("hd");
+    window.addEventListener("scroll", (event) => {
+        let scroll = this.scrollY;
+        if(scroll == 0)
+        {   
+            if(hdr.classList.contains("hd-bg") == true)
+            {
+                hdr.classList.remove("hd-bg")
+            }
+        }
+        else
+        {
+            if(hdr.classList.contains("hd-bg") == false)
+            {
+                hdr.classList.add("hd-bg")
+            }
+        }
+    });
+    const delay = (ms) => new Promise((res) => setTimeout(res, ms));
+    let home = document.getElementById("home");
+    let text = document.getElementById("text");
+    let audio = document.getElementById("audio");
+    let video = document.getElementById("video");
+
+    function disactivateClass() {
+        if (home.classList.contains("active") == true) {
+            home.classList.remove("active");
+            home.classList.add("inactive");
+            
+        }
+    }
+    function activateClass() {
+        if (home.classList.contains("inactive") == true) {
+            home.classList.add("active");
+            home.classList.remove("inactive");
+        }
+    }
+    text.addEventListener("mouseenter", () => {
+        disactivateClass();
+    })
+    text.addEventListener("mouseleave", () => {
+        activateClass();
+    })
+
+    audio.addEventListener("mouseenter", () => {
+        disactivateClass();
+    })
+    audio.addEventListener("mouseleave", () => {
+        activateClass();
+    })
+
+    video.addEventListener("mouseenter", () => {
+        disactivateClass();
+    })
+    video.addEventListener("mouseleave", () => {
+        activateClass();
+    })
+</script>
+{% endblock %}
